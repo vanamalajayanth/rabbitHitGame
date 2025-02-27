@@ -7,12 +7,27 @@
         margin: 0px;
         box-sizing: border-box;
         padding: 0px;
+        text-align: center;
       }
-      main {
+
+      body {
         height: 100vh;
         width: 100vw;
         background-color: #41980a;
-        display: flex;
+        display: grid;
+        align-items: center;
+        justify-content: center;
+      }
+
+      header {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      main {
+        background-color: #41980a;
         align-items: center;
         justify-content: center;
       }
@@ -39,6 +54,10 @@
     </style>
   </head>
   <body>
+    <header>
+      <h1>catch the rabbit</h1>
+      <h2>click to catch rabbit</h2>
+    </header>
     <main>
       <section id="pitsSection">
         <div class="pits"></div>
@@ -54,6 +73,10 @@
     </main>
 
     <script>
+      let mode = +prompt("select mode \n 1. easy \n 2. normal \n3. hard");
+      while (mode > 3 || mode < 1) {
+        mode = +prompt("select mode \n 1. easy \n 2. normal \n3. hard");
+      }
       const pits = document.querySelectorAll(".pits");
       const rabbit = document.createElement("img");
       rabbit.setAttribute("src", "images/image.png");
@@ -64,10 +87,13 @@
         const pitIndex = Math.floor((Math.random() * 100) % 9);
         pits[pitIndex].appendChild(rabbit);
         rabbit.addEventListener("click", () => {
-          console.log("completed");
+          pits[pitIndex].removeChild(rabbit);
+          const winning = document.createElement("h1");
+          winning.textContent = "yay you have won";
+          document.querySelector("section").after(winning);
           clearInterval(id);
         });
-      }, 500);
+      }, 3000 - mode * 1000 + 500);
     </script>
   </body>
 </html>
