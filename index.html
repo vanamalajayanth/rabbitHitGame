@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rabbit hit</title>
+    <style>
+      * {
+        margin: 0px;
+        box-sizing: border-box;
+        padding: 0px;
+      }
+      main {
+        height: 100vh;
+        width: 100vw;
+        background-color: #41980a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #pitsSection {
+        width: 700px;
+        height: 500px;
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        grid-template-rows: 100px 100px 100px;
+        align-content: space-evenly;
+        justify-content: space-evenly;
+      }
+
+      .pits {
+        transform: rotateX(60deg);
+        box-shadow: 10px 28px 21px black;
+        background-color: rgb(60, 29, 29);
+        height: 100px;
+        width: 100px;
+        border: 10px solid rgb(212, 210, 210);
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section id="pitsSection">
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+        <div class="pits"></div>
+      </section>
+    </main>
+
+    <script>
+      const pits = document.querySelectorAll(".pits");
+      const rabbit = document.createElement("img");
+      rabbit.setAttribute("src", "images/image.png");
+      rabbit.style =
+        "height: 200px; width: 90px; position: relative;bottom: 100px;";
+
+      const id = setInterval(() => {
+        const pitIndex = Math.floor((Math.random() * 100) % 9);
+        pits[pitIndex].appendChild(rabbit);
+        rabbit.addEventListener("click", () => {
+          console.log("completed");
+          clearInterval(id);
+        });
+      }, 500);
+    </script>
+  </body>
+</html>
